@@ -1,0 +1,19 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = set()
+        total_length = len(nums)
+        
+        def helperFunction(tempS, nums, total_length):
+            if(len(tempS) == total_length):
+                result.add((tuple(tempS)))
+                return
+            for i in nums:
+                if i not in tempS:
+                    tempS.append(i)
+                    helperFunction(tempS,nums,total_length)
+                    tempS.pop()
+        
+        for i in nums:
+            tempS=[i]
+            helperFunction(tempS, nums, total_length)
+        return list(result)
